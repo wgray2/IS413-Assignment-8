@@ -1,0 +1,30 @@
+﻿<!--
+    Wyatt Gray - Section 1 - Assignment 8
+    I'd like to have you know I had to do this twice because GitHub destroyed my project. Have mercy.
+    This program creates a database for a book store and outputs data in the database onto the index page.
+    Pagination is used to display 5 books per page. There are Partial Views based on Category, pagination updates
+    based on items per category, and I've implemented the Sqlite database functionality.
+    There is a shopping cart feature that books can be added to and removed from. A subtotal is displayed.
+    Cart summary info is displayed at the top of the page.
+    -->
+<!--
+    My 3 bootstrap commands are card-header, list-group, and list-group-item. I used a few more than that, but those are probably most notable.    
+-->
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model BookListViewModel
+
+@foreach (var x in Model.Books)
+{
+    <!--Display the database information-->
+    <partial name="BookCat" model="x"/>
+}
+
+<!--This displays the tag helpers and highlights the page you're on and the one you're hovering over-->
+<div page-model="@Model.PagingInfo" page-action="Index" 
+     page-classes-enabled="true" page-class="btn" 
+     page-class-normal ="btn-outline-dark" page-class-selected="btn-primary"
+     page-url-category="@Model.Category"
+     class="btn-group pull-right m-1 text-center"></div>
